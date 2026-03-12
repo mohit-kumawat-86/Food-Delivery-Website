@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse the full Foodie menu - Search restaurants, filter by category, and order your favorite food.">
+    <title>Menu — Foodie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+    <style>
+        /* ==========================================
+           MENU PAGE SPECIFIC STYLES
+           ========================================== */
+        .menu-page {
+            padding: 2rem 0;
+        }
+
+        .menu-page h2 {
+            font-size: 2rem;
+            color: var(--lead);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-page .page-subtitle {
+            color: #888;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        /* SEARCH BAR */
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: var(--pure-white);
+            padding: 0.6rem;
+            border-radius: 1rem;
+            box-shadow: rgba(0, 0, 0, 0.08) 0 4px 15px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            font-family: inherit;
+            background: transparent;
+            color: var(--lead);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: #bbb;
+        }
+
+        .search-bar button {
+            background: var(--gold-finger);
+            color: var(--pure-white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.7rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+            font-family: inherit;
+        }
+
+        .search-bar button:hover {
+            background: var(--lead);
+        }
+
+        /* CATEGORY FILTER PILLS */
+        .category-pills {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            border: 2px solid #e0e0e0;
+            background: var(--pure-white);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            transition: .3s;
+            font-family: inherit;
+        }
+
+        .pill:hover {
+            border-color: var(--gold-finger);
+            color: var(--gold-finger);
+        }
+
+        .pill.active {
+            background: var(--gold-finger);
+            border-color: var(--gold-finger);
+            color: var(--pure-white);
+        }
+
+        /* RESULTS COUNT */
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        .results-info .clear-filters {
+            color: var(--gold-finger);
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            background: none;
+            font-size: 0.9rem;
+            font-family: inherit;
+        }
+
+        .results-info .clear-filters:hover {
+            text-decoration: underline;
+        }
+
+        /* RESTAURANT SECTION */
+        .restaurant-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .restaurant-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--hint-yellow);
+        }
+
+        .restaurant-header-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--hint-yellow);
+        }
+
+        .restaurant-header-info h3 {
+            font-size: 1.3rem;
+            color: var(--lead);
+            margin-bottom: 0.2rem;
+        }
+
+        .restaurant-header-info .restaurant-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #888;
+            flex-wrap: wrap;
+        }
+
+        .restaurant-header-info .restaurant-meta span i {
+            color: var(--gold-finger);
+            margin-right: 0.2rem;
+        }
+
+        /* MENU ITEMS GRID */
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .menu-item-card {
+            background: var(--pure-white);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: rgba(0, 0, 0, 0.08) 0 3px 12px;
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item-card:hover {
+            box-shadow: rgba(0, 0, 0, 0.15) 0 6px 20px;
+            transform: translateY(-3px);
+        }
+
+        .menu-item-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: var(--hint-yellow);
+        }
+
+        .menu-item-body {
+            padding: 1.2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-item-body h4 {
+            font-size: 1.1rem;
+            color: var(--lead);
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-item-body .item-desc {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 0.8rem;
+            flex: 1;
+        }
+
+        .menu-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold-finger);
+        }
+
+        .item-rating {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .item-rating i {
+            color: var(--gold-finger);
+        }
+
+        .btn-add {
+            padding: 0.5rem 1.2rem;
+            background: var(--gold-finger);
+            color: var(--pure-white);
+            border: none;
+            border-radius: 0.6rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+            font-family: inherit;
+        }
+
+        .btn-add:hover {
+            background: var(--lead);
+        }
+
+        .btn-add.added {
+            background: var(--lead);
+        }
+
+        /* EMPTY STATE */
+        .menu-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #999;
+        }
+
+        .menu-empty i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* RESPONSIVE */
+        @media screen and (max-width: 768px) {
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-bar button {
+                width: 100%;
+            }
+
+            .menu-items-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .restaurant-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .restaurant-header-info .restaurant-meta {
+                justify-content: center;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .category-pills {
+                gap: 0.4rem;
+            }
+
+            .pill {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar flex between wrapper">
+            <a href="index.html" class="logo">Foodie.</a>
+            <ul class="navlist flex gap-3">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active-link">Menu</a></li>
+                <li><a href="index.html#how-it-works">Service</a></li>
+                <li><a href="index.html#about">About us</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="desktop-action flex gap-2">
+                <a href="cart.html" class="cart-icon" id="cart-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-value" id="header-cart-count">0</span>
+                </a>
+                <a href="login.html" class="btn" id="sign-in-btn">
+                    Sign in&NonBreakingSpace;<i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </a>
+                <a href="#" class="hamburger" id="hamburger-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+            </div>
+            <ul class="mobile-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="index.html#how-it-works">Service</a></li>
+                <li><a href="index.html#about">About us</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="login.html" class="btn">Sign in&NonBreakingSpace;<i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MENU PAGE -->
+    <main class="page-container menu-page">
+        <h2><i class="fa-solid fa-utensils"></i> Our Menu</h2>
+        <p class="page-subtitle">Explore delicious dishes from our top restaurants</p>
+
+        <!-- SEARCH BAR -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search for food, restaurants..." autocomplete="off">
+            <button onclick="handleSearch()"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        </div>
+
+        <!-- CATEGORY FILTER PILLS -->
+        <div class="category-pills" id="category-pills">
+            <button class="pill active" data-category="all" onclick="filterByCategory('all', this)">All</button>
+            <!-- Other pills loaded dynamically -->
+        </div>
+
+        <!-- RESULTS INFO -->
+        <div class="results-info" id="results-info" style="display:none;">
+            <span id="results-count">Showing 0 items</span>
+            <button class="clear-filters" onclick="clearFilters()">Clear filters</button>
+        </div>
+
+        <!-- LOADING -->
+        <div id="loading" class="loading">
+            <i class="fa-solid fa-spinner"></i>
+            <p>Loading menu...</p>
+        </div>
+
+        <!-- MENU CONTENT -->
+        <div id="menu-content" style="display:none;">
+            <!-- Restaurant sections rendered by JS -->
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="menu-empty" class="menu-empty" style="display:none;">
+            <i class="fa-solid fa-face-frown"></i>
+            <h3>No items found</h3>
+            <p>Try a different search or category</p>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        let allRestaurants = [];
+        let allProducts = [];
+        let activeCategory = 'all';
+        let searchQuery = '';
+
+        // ==========================================
+        // INITIALIZE
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkAuth();
+            await loadCategories();
+            await loadMenu();
+            updateCartCount();
+
+            // Search on Enter key
+            document.getElementById('search-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') handleSearch();
+            });
+        });
+
+        // ==========================================
+        // AUTH CHECK
+        // ==========================================
+        async function checkAuth() {
+            try {
+                const res = await fetch(`${API_BASE}/auth/me`, { credentials: 'include' });
+                if (res.ok) {
+                    const data = await res.json();
+                    const signInBtn = document.getElementById('sign-in-btn');
+                    signInBtn.href = 'profile.html';
+                    signInBtn.innerHTML = `<i class="fa-solid fa-user"></i> ${data.data.name.split(' ')[0]}`;
+                    const mobileBtn = document.querySelector('.mobile-menu .btn');
+                    if (mobileBtn) {
+                        mobileBtn.href = 'profile.html';
+                        mobileBtn.innerHTML = `<i class="fa-solid fa-user"></i> ${data.data.name.split(' ')[0]}`;
+                    }
+                }
+            } catch (e) { /* not logged in */ }
+        }
+
+        // ==========================================
+        // LOAD CATEGORIES (pills)
+        // ==========================================
+        async function loadCategories() {
+            try {
+                const res = await fetch(`${API_BASE}/categories`, { credentials: 'include' });
+                const data = await res.json();
+                const pills = document.getElementById('category-pills');
+
+                data.data.forEach(cat => {
+                    const btn = document.createElement('button');
+                    btn.className = 'pill';
+                    btn.dataset.category = cat.name;
+                    btn.innerHTML = `${cat.icon} ${cat.name}`;
+                    btn.onclick = function() { filterByCategory(cat.name, this); };
+                    pills.appendChild(btn);
+                });
+            } catch (e) {
+                console.error('Could not load categories:', e);
+            }
+        }
+
+        // ==========================================
+        // LOAD FULL MENU
+        // ==========================================
+        async function loadMenu() {
+            const loading = document.getElementById('loading');
+            const content = document.getElementById('menu-content');
+            const empty = document.getElementById('menu-empty');
+            const resultsInfo = document.getElementById('results-info');
+
+            try {
+                // Fetch restaurants and products
+                const [resRes, prodRes] = await Promise.all([
+                    fetch(`${API_BASE}/restaurants`, { credentials: 'include' }),
+                    fetch(`${API_BASE}/products`, { credentials: 'include' })
+                ]);
+
+                const resData = await resRes.json();
+                const prodData = await prodRes.json();
+
+                allRestaurants = resData.data;
+                allProducts = prodData.data;
+
+                loading.style.display = 'none';
+                renderMenu(allRestaurants, allProducts);
+
+            } catch (error) {
+                loading.innerHTML = '<p>Could not connect to server. Please make sure the backend is running.</p>';
+            }
+        }
+
+        // ==========================================
+        // RENDER MENU
+        // ==========================================
+        function renderMenu(restaurants, products) {
+            const content = document.getElementById('menu-content');
+            const empty = document.getElementById('menu-empty');
+            const resultsInfo = document.getElementById('results-info');
+
+            if (products.length === 0) {
+                content.style.display = 'none';
+                empty.style.display = 'block';
+                resultsInfo.style.display = 'none';
+                return;
+            }
+
+            empty.style.display = 'none';
+            content.style.display = 'block';
+
+            // Show results count if filtering
+            if (activeCategory !== 'all' || searchQuery) {
+                resultsInfo.style.display = 'flex';
+                document.getElementById('results-count').textContent = `Showing ${products.length} item${products.length !== 1 ? 's' : ''}`;
+            } else {
+                resultsInfo.style.display = 'none';
+            }
+
+            // Group products by restaurant
+            const restaurantMap = {};
+            products.forEach(p => {
+                if (!restaurantMap[p.restaurant_id]) {
+                    restaurantMap[p.restaurant_id] = {
+                        restaurant: restaurants.find(r => r.id === p.restaurant_id),
+                        products: []
+                    };
+                }
+                restaurantMap[p.restaurant_id].products.push(p);
+            });
+
+            let html = '';
+
+            Object.values(restaurantMap).forEach(group => {
+                if (!group.restaurant) return;
+                const r = group.restaurant;
+
+                html += `
+                    <div class="restaurant-section">
+                        <div class="restaurant-header">
+                            <img src="${r.image}" alt="${r.name}" class="restaurant-header-img">
+                            <div class="restaurant-header-info">
+                                <h3>${r.name}</h3>
+                                <div class="restaurant-meta">
+                                    <span><i class="fa-solid fa-star"></i> ${r.rating}</span>
+                                    <span><i class="fa-solid fa-truck"></i> ${r.delivery_time}</span>
+                                    <span><i class="fa-solid fa-tag"></i> ${r.delivery_fee}</span>
+                                    <span>${r.cuisine}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-items-grid">
+                            ${group.products.map(p => `
+                                <div class="menu-item-card">
+                                    <img src="${p.image}" alt="${p.name}" class="menu-item-img">
+                                    <div class="menu-item-body">
+                                        <h4>${p.name}</h4>
+                                        <p class="item-desc">${p.description}</p>
+                                        <div class="menu-item-footer">
+                                            <div>
+                                                <span class="item-price">${formatCurrency(p.price)}</span>
+                                                <span class="item-rating"><i class="fa-solid fa-star"></i> ${p.rating} (${p.review_count})</span>
+                                            </div>
+                                            <button class="btn-add" id="add-btn-${p.id}" onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', this)">
+                                                <i class="fa-solid fa-plus"></i> Add
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = html;
+        }
+
+        // ==========================================
+        // FILTER BY CATEGORY
+        // ==========================================
+        function filterByCategory(category, btn) {
+            activeCategory = category;
+
+            // Update active pill
+            document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+
+            applyFilters();
+        }
+
+        // ==========================================
+        // SEARCH
+        // ==========================================
+        function handleSearch() {
+            searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
+            applyFilters();
+        }
+
+        // ==========================================
+        // APPLY FILTERS (category + search)
+        // ==========================================
+        function applyFilters() {
+            let filteredProducts = [...allProducts];
+            let filteredRestaurants = [...allRestaurants];
+
+            // Category filter
+            if (activeCategory !== 'all') {
+                const matchingRestaurants = allRestaurants.filter(r =>
+                    r.cuisine.toLowerCase().includes(activeCategory.toLowerCase())
+                );
+                const matchingIds = matchingRestaurants.map(r => r.id);
+                filteredProducts = filteredProducts.filter(p => matchingIds.includes(p.restaurant_id));
+            }
+
+            // Search filter
+            if (searchQuery) {
+                filteredProducts = filteredProducts.filter(p =>
+                    p.name.toLowerCase().includes(searchQuery) ||
+                    p.description.toLowerCase().includes(searchQuery) ||
+                    p.restaurant_name.toLowerCase().includes(searchQuery)
+                );
+            }
+
+            renderMenu(allRestaurants, filteredProducts);
+        }
+
+        // ==========================================
+        // CLEAR FILTERS
+        // ==========================================
+        function clearFilters() {
+            activeCategory = 'all';
+            searchQuery = '';
+            document.getElementById('search-input').value = '';
+            document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+            document.querySelector('.pill[data-category="all"]').classList.add('active');
+            renderMenu(allRestaurants, allProducts);
+        }
+
+        // ==========================================
+        // ADD TO CART
+        // ==========================================
+        async function addToCart(productId, productName, btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+
+            try {
+                const res = await fetch(`${API_BASE}/cart`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ product_id: productId, quantity: 1 })
+                });
+
+                const data = await res.json();
+
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Added';
+                btn.classList.add('added');
+                showNotification(data.message || `${productName} added to cart!`);
+                updateCartCount();
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add';
+                    btn.classList.remove('added');
+                    btn.disabled = false;
+                }, 1500);
+            } catch (error) {
+                btn.innerHTML = '<i class="fa-solid fa-plus"></i> Add';
+                btn.disabled = false;
+                showNotification('Could not add to cart. Try again.');
+            }
+        }
+
+        // ==========================================
+        // UPDATE CART COUNT
+        // ==========================================
+        async function updateCartCount() {
+            try {
+                const res = await fetch(`${API_BASE}/cart`, { credentials: 'include' });
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('header-cart-count').textContent = data.data.summary.item_count;
+                }
+            } catch (e) { /* ok */ }
+        }
+
+        // ==========================================
+        // NOTIFICATION
+        // ==========================================
+        function showNotification(message) {
+            const existing = document.querySelector('.success-message');
+            if (existing) existing.remove();
+
+            const el = document.createElement('div');
+            el.className = 'success-message';
+            el.textContent = message;
+            document.body.appendChild(el);
+
+            setTimeout(() => {
+                el.style.animation = 'slideOut 0.3s ease-in-out forwards';
+                setTimeout(() => el.remove(), 300);
+            }, 2000);
+        }
+
+        // ==========================================
+        // UTILITY
+        // ==========================================
+        function formatCurrency(amount) {
+            return `₹${amount.toLocaleString('en-IN')}`;
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('.mobile-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>

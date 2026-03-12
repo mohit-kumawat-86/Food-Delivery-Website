@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your Foodie cart - Review your items, update quantities, and proceed to checkout.">
+    <title>Cart — Foodie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav class="navbar flex between wrapper">
+            <a href="index.html" class="logo">Foodie.</a>
+            <ul class="navlist flex gap-3">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#menu">Menu</a></li>
+                <li><a href="index.html#how-it-works">Service</a></li>
+                <li><a href="index.html#about">About us</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="desktop-action flex gap-2">
+                <a href="cart.html" class="cart-icon" id="cart-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-value" id="header-cart-count">0</span>
+                </a>
+                <a href="login.html" class="btn" id="sign-in-btn">
+                    Sign in&NonBreakingSpace;<i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </a>
+                <a href="#" class="hamburger" id="hamburger-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+            </div>
+            <ul class="mobile-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#menu">Menu</a></li>
+                <li><a href="index.html#how-it-works">Service</a></li>
+                <li><a href="index.html#about">About us</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="login.html" class="btn">Sign in&NonBreakingSpace;<i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CART PAGE -->
+    <main class="page-container cart-page">
+        <h2><i class="fa-solid fa-bag-shopping"></i> Your Cart</h2>
+
+        <div id="loading" class="loading">
+            <i class="fa-solid fa-spinner"></i>
+            <p>Loading your cart...</p>
+        </div>
+
+        <div id="cart-content" style="display:none;">
+            <!-- Empty cart state -->
+            <div id="cart-empty" class="cart-empty" style="display:none;">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <h3>Your cart is empty</h3>
+                <p>Looks like you haven't added anything to your cart yet.</p>
+                <a href="index.html#restaurants" class="btn">Browse Restaurants</a>
+            </div>
+
+            <!-- Cart with items -->
+            <div id="cart-filled" class="cart-layout" style="display:none;">
+                <div class="cart-items" id="cart-items-list">
+                    <!-- Cart items rendered by JS -->
+                </div>
+
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="summary-subtotal">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Fee</span>
+                        <span id="summary-delivery">₹0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (5%)</span>
+                        <span id="summary-tax">₹0</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="summary-total">₹0</span>
+                    </div>
+
+                    <div class="checkout-form">
+                        <div class="form-group">
+                            <label for="delivery-address">Delivery Address</label>
+                            <textarea id="delivery-address" placeholder="Enter your delivery address" rows="2"></textarea>
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label>Payment Method</label>
+                            <div class="payment-options" style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; cursor: pointer;">
+                                    <input type="radio" name="payment-method" value="cod" checked>
+                                    <i class="fa-solid fa-money-bill-wave" style="color: var(--primary);"></i> Cash on Delivery
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; cursor: pointer;">
+                                    <input type="radio" name="payment-method" value="card">
+                                    <i class="fa-solid fa-credit-card" style="color: var(--primary);"></i> Credit / Debit Card
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal; cursor: pointer;">
+                                    <input type="radio" name="payment-method" value="upi">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" style="height: 16px;"> UPI (GPay, PhonePe, Paytm)
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn-full" id="checkout-btn" onclick="handleCheckout()" style="margin-top: 1.5rem;">
+                            <i class="fa-solid fa-bag-shopping"></i> Place Order
+                        </button>
+
+                        <div style="text-align:center; margin-top:1rem;">
+                            <button class="btn-outline" onclick="clearCart()" style="font-size:0.85rem; padding:0.5rem 1rem;">
+                                <i class="fa-solid fa-trash"></i> Clear Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        let currentUser = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            await checkAuth();
+            await loadCart();
+        });
+
+        async function checkAuth() {
+            try {
+                const res = await fetch(`${API_BASE}/auth/me`, { credentials: 'include' });
+                if (res.ok) {
+                    const data = await res.json();
+                    currentUser = data.data;
+                    // Update header to show profile link instead of sign in
+                    const signInBtn = document.getElementById('sign-in-btn');
+                    signInBtn.href = 'profile.html';
+                    signInBtn.innerHTML = `<i class="fa-solid fa-user"></i> ${currentUser.name.split(' ')[0]}`;
+                    // Pre-fill delivery address
+                    if (currentUser.address) {
+                        document.getElementById('delivery-address').value = currentUser.address;
+                    }
+                }
+            } catch (e) { /* not logged in */ }
+        }
+
+        async function loadCart() {
+            const loading = document.getElementById('loading');
+            const content = document.getElementById('cart-content');
+            const empty = document.getElementById('cart-empty');
+            const filled = document.getElementById('cart-filled');
+
+            try {
+                const res = await fetch(`${API_BASE}/cart`, { credentials: 'include' });
+                const data = await res.json();
+                const cart = data.data;
+
+                loading.style.display = 'none';
+                content.style.display = 'block';
+
+                if (cart.items.length === 0) {
+                    empty.style.display = 'block';
+                    filled.style.display = 'none';
+                    updateHeaderCartCount(0);
+                    return;
+                }
+
+                empty.style.display = 'none';
+                filled.style.display = 'grid';
+
+                // Render cart items
+                const itemsList = document.getElementById('cart-items-list');
+                itemsList.innerHTML = cart.items.map(item => `
+                    <div class="cart-item" id="cart-item-${item.id}">
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.product_name}">
+                        </div>
+                        <div class="cart-item-details">
+                            <h4>${item.product_name}</h4>
+                            <p class="cart-item-restaurant">${item.restaurant_name}</p>
+                            <p class="cart-item-price">${formatCurrency(item.price * item.quantity)}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                            <span class="qty-value">${item.quantity}</span>
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeItem(${item.id})" title="Remove">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                `).join('');
+
+                // Update summary
+                document.getElementById('summary-subtotal').textContent = formatCurrency(cart.summary.subtotal);
+                document.getElementById('summary-delivery').textContent = formatCurrency(cart.summary.delivery_fee);
+                document.getElementById('summary-tax').textContent = formatCurrency(cart.summary.tax);
+                document.getElementById('summary-total').textContent = formatCurrency(cart.summary.total);
+
+                updateHeaderCartCount(cart.summary.item_count);
+
+            } catch (error) {
+                loading.innerHTML = '<p>Could not connect to server. Please make sure the backend is running.</p>';
+            }
+        }
+
+        async function updateQuantity(itemId, newQty) {
+            if (newQty <= 0) {
+                await removeItem(itemId);
+                return;
+            }
+
+            try {
+                await fetch(`${API_BASE}/cart/${itemId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ quantity: newQty })
+                });
+                await loadCart();
+            } catch (error) {
+                console.error('Error updating quantity:', error);
+            }
+        }
+
+        async function removeItem(itemId) {
+            const item = document.getElementById(`cart-item-${itemId}`);
+            if (item) {
+                item.style.opacity = '0.5';
+                item.style.transform = 'translateX(50px)';
+            }
+
+            try {
+                await fetch(`${API_BASE}/cart/${itemId}`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+                setTimeout(() => loadCart(), 300);
+            } catch (error) {
+                console.error('Error removing item:', error);
+                if (item) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'none';
+                }
+            }
+        }
+
+        async function clearCart() {
+            if (!confirm('Clear all items from your cart?')) return;
+
+            try {
+                await fetch(`${API_BASE}/cart`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+                await loadCart();
+            } catch (error) {
+                console.error('Error clearing cart:', error);
+            }
+        }
+
+        async function handleCheckout() {
+            const btn = document.getElementById('checkout-btn');
+            const address = document.getElementById('delivery-address').value.trim();
+            const paymentMethodInput = document.querySelector('input[name="payment-method"]:checked');
+            const paymentMethod = paymentMethodInput ? paymentMethodInput.value : 'cod';
+
+            if (!address) {
+                document.getElementById('delivery-address').focus();
+                document.getElementById('delivery-address').style.borderColor = '#e74c3c';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Placing order...';
+
+            try {
+                const response = await fetch(`${API_BASE}/orders`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ delivery_address: address, payment_method: paymentMethod })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    let paymentMsg = paymentMethod === 'cod' ? 'Please keep cash ready for delivery.' : 'Payment processed successfully.';
+                    alert(`Order #${data.data.id} placed successfully!\n\nTotal: ${formatCurrency(data.data.total)}\nPayment: ${paymentMethod.toUpperCase()}\n\nYour food is being prepared!\n${paymentMsg}`);
+                    window.location.href = 'orders.html';
+                } else {
+                    alert(data.error || 'Could not place order. Please try again.');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fa-solid fa-bag-shopping"></i> Place Order';
+                }
+            } catch (error) {
+                alert('Cannot connect to server. Please try again.');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-bag-shopping"></i> Place Order';
+            }
+        }
+
+        function formatCurrency(amount) {
+            return `₹${amount.toLocaleString('en-IN')}`;
+        }
+
+        function updateHeaderCartCount(count) {
+            document.getElementById('header-cart-count').textContent = count;
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('.mobile-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>

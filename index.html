@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foodie - Your favorite food delivery platform. Order from top restaurants with fast delivery. Browse pizza, burgers, sushi, Indian cuisine & more!">
+    <title>Foodie - Food Delivery | Order Food Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER PART -->
+    <header>
+        <nav class="navbar flex between wrapper">
+            <a href="#" class="logo">Foodie.</a>
+
+            <!-- DESKTOP MENU -->
+            <ul class="navlist flex gap-3">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="menu.html">Menu</a>
+                </li>
+                <li>
+                    <a href="#how-it-works">Service</a>
+                </li>
+                <li>
+                    <a href="#about">About us</a>
+                </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
+
+            <div class="desktop-action flex gap-2">
+                <a href="cart.html" class="cart-icon" id="cart-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-value">0</span>
+                </a>
+
+                <a href="login.html" class="btn" id="sign-in-btn">
+                    Sign in
+                    &NonBreakingSpace;
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </a>
+
+                <a href="#" class="hamburger" id="hamburger-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+            </div>
+
+            <!-- MOBILE MENU -->
+            <ul CLASS="mobile-menu">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="menu.html">Menu</a>
+                </li>
+                <li>
+                    <a href="#how-it-works">Service</a>
+                </li>
+                <li>
+                    <a href="#about">About us</a>
+                </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+                <li>
+                    <a href="login.html" class="btn">
+                        Sign in
+                        &NonBreakingSpace;
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <!-- SECTIONS PART -->
+    <main>
+        <!-- HERO SECTION -->
+        <section class="hero-section-wrapper" id="home">
+            <div class="hero-section flex wrapper gap-4">
+                <div class="content">
+                    <h1>
+                        Enjoy Your Delicious Food
+                        <span>Delivered</span>
+                    </h1>
+                    <p class="para">
+                        We will fill your tummy with delicious<br>
+                        food with fast delivery.
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#restaurants" class="btn">Order Now</a>
+
+                        <a href="https://twitter.com" class="social-icon" target="_blank">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com" class="social-icon" target="_blank">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://facebook.com" class="social-icon" target="_blank">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="https://google.com" class="social-icon" target="_blank">
+                            <i class="fa-brands fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="image-container">
+                    <img src="images/delivery-boy.png" alt="Delivery boy with food">
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORIES SECTION -->
+        <section class="categories-section wrapper" id="menu">
+            <div class="section-header">
+                <h2>What are your cravings?</h2>
+                <p>Choose from our wide variety of food categories</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">🍕</div>
+                    <h3>Pizza</h3>
+                    <p>125+ Items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍔</div>
+                    <h3>Burgers</h3>
+                    <p>98+ Items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍜</div>
+                    <h3>Asian</h3>
+                    <p>156+ Items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🥘</div>
+                    <h3>Indian</h3>
+                    <p>203+ Items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍣</div>
+                    <h3>Sushi</h3>
+                    <p>87+ Items</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🍰</div>
+                    <h3>Desserts</h3>
+                    <p>112+ Items</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESTAURANTS/PRODUCTS SECTION -->
+        <section class="restaurants-section wrapper" id="restaurants">
+            <div class="section-header">
+                <h2>Popular Restaurants</h2>
+                <p>Order from your favorite restaurants</p>
+            </div>
+            <div class="restaurants-grid">
+                <div class="restaurant-card">
+                    <div class="restaurant-image">
+                        <img src="images/pizza.png" alt="Pizza Paradise">
+                    </div>
+                    <div class="restaurant-info">
+                        <h3>Pizza Paradise</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">(4.8) • 1250+ orders</span>
+                        </div>
+                        <p class="cuisine">Italian, Pizzas, Continental</p>
+                        <div class="meta-info">
+                            <span class="delivery-time">⏱️ 20-30 min</span>
+                            <span class="delivery-fee">₹50 Delivery</span>
+                        </div>
+                        <button class="btn-small view-menu">View Menu</button>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image">
+                        <img src="images/burger.png" alt="Burger Barn">
+                    </div>
+                    <div class="restaurant-info">
+                        <h3>Burger Barn</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-text">(4.5) • 980+ orders</span>
+                        </div>
+                        <p class="cuisine">Fast Food, Burgers, American</p>
+                        <div class="meta-info">
+                            <span class="delivery-time">⏱️ 15-20 min</span>
+                            <span class="delivery-fee">Free</span>
+                        </div>
+                        <button class="btn-small view-menu">View Menu</button>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image">
+                        <img src="images/fried-chicken.png" alt="Spice Kitchen">
+                    </div>
+                    <div class="restaurant-info">
+                        <h3>Spice Kitchen</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">(4.9) • 2100+ orders</span>
+                        </div>
+                        <p class="cuisine">Indian, North Indian, Curries</p>
+                        <div class="meta-info">
+                            <span class="delivery-time">⏱️ 25-35 min</span>
+                            <span class="delivery-fee">₹49 Delivery</span>
+                        </div>
+                        <button class="btn-small view-menu">View Menu</button>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image">
+                        <img src="images/spring-roll.png" alt="Asian Wok">
+                    </div>
+                    <div class="restaurant-info">
+                        <h3>Asian Wok</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-text">(4.6) • 1450+ orders</span>
+                        </div>
+                        <p class="cuisine">Chinese, Thai, Pan-Asian</p>
+                        <div class="meta-info">
+                            <span class="delivery-time">⏱️ 20-30 min</span>
+                            <span class="delivery-fee">₹40 Delivery</span>
+                        </div>
+                        <button class="btn-small view-menu">View Menu</button>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image">
+                        <img src="images/chicken-roll.png" alt="Taco Fiesta">
+                    </div>
+                    <div class="restaurant-info">
+                        <h3>Taco Fiesta</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-text">(4.4) • 650+ orders</span>
+                        </div>
+                        <p class="cuisine">Mexican, Tacos, Burritos</p>
+                        <div class="meta-info">
+                            <span class="delivery-time">⏱️ 18-25 min</span>
+                            <span class="delivery-fee">₹30 Delivery</span>
+                        </div>
+                        <button class="btn-small view-menu">View Menu</button>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image">
+                        <img src="images/spaghetti.png" alt="Sushi Master">
+                    </div>
+                    <div class="restaurant-info">
+                        <h3>Sushi Master</h3>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-text">(4.9) • 890+ orders</span>
+                        </div>
+                        <p class="cuisine">Japanese, Sushi, Asian</p>
+                        <div class="meta-info">
+                            <span class="delivery-time">⏱️ 30-40 min</span>
+                            <span class="delivery-fee">₹60 Delivery</span>
+                        </div>
+                        <button class="btn-small view-menu">View Menu</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PRODUCTS SECTION -->
+        <section class="products-section wrapper" id="products">
+            <div class="section-header">
+                <h2>Featured Dishes</h2>
+                <p>Most loved items from our restaurants</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/pizza.png" alt="Margherita Pizza">
+                    </div>
+                    <div class="product-content">
+                        <h3>Margherita Pizza</h3>
+                        <p class="restaurant-name">Pizza Paradise</p>
+                        <p class="product-desc">Fresh mozzarella, basil, tomato sauce</p>
+                        <div class="rating-mini">⭐ 4.8 (245 reviews)</div>
+                        <div class="product-footer flex between">
+                            <span class="price">₹349</span>
+                            <button class="btn-add-cart" data-product-id="1" data-item="Margherita Pizza" data-price="349" data-restaurant="Pizza Paradise">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/burger.png" alt="Cheese Burger">
+                    </div>
+                    <div class="product-content">
+                        <h3>Cheese Burger</h3>
+                        <p class="restaurant-name">Burger Barn</p>
+                        <p class="product-desc">Juicy beef patty with melted cheese</p>
+                        <div class="rating-mini">⭐ 4.7 (189 reviews)</div>
+                        <div class="product-footer flex between">
+                            <span class="price">₹199</span>
+                            <button class="btn-add-cart" data-product-id="2" data-item="Cheese Burger" data-price="199" data-restaurant="Burger Barn">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/spaghetti.png" alt="Pad Thai">
+                    </div>
+                    <div class="product-content">
+                        <h3>Pad Thai</h3>
+                        <p class="restaurant-name">Asian Wok</p>
+                        <p class="product-desc">Stir-fried noodles with shrimp and peanuts</p>
+                        <div class="rating-mini">⭐ 4.9 (312 reviews)</div>
+                        <div class="product-footer flex between">
+                            <span class="price">₹299</span>
+                            <button class="btn-add-cart" data-product-id="3" data-item="Pad Thai" data-price="299" data-restaurant="Asian Wok">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/fried-chicken.png" alt="Butter Chicken">
+                    </div>
+                    <div class="product-content">
+                        <h3>Butter Chicken</h3>
+                        <p class="restaurant-name">Spice Kitchen</p>
+                        <p class="product-desc">Tender chicken in creamy tomato sauce</p>
+                        <div class="rating-mini">⭐ 4.8 (421 reviews)</div>
+                        <div class="product-footer flex between">
+                            <span class="price">₹399</span>
+                            <button class="btn-add-cart" data-product-id="4" data-item="Butter Chicken" data-price="399" data-restaurant="Spice Kitchen">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/chicken-roll.png" alt="Chicken Tacos">
+                    </div>
+                    <div class="product-content">
+                        <h3>Chicken Tacos</h3>
+                        <p class="restaurant-name">Taco Fiesta</p>
+                        <p class="product-desc">Grilled chicken with salsa and lime</p>
+                        <div class="rating-mini">⭐ 4.6 (156 reviews)</div>
+                        <div class="product-footer flex between">
+                            <span class="price">₹249</span>
+                            <button class="btn-add-cart" data-product-id="5" data-item="Chicken Tacos" data-price="249" data-restaurant="Taco Fiesta">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/sandwich.png" alt="Salmon Sushi Roll">
+                    </div>
+                    <div class="product-content">
+                        <h3>Salmon Sushi Roll</h3>
+                        <p class="restaurant-name">Sushi Master</p>
+                        <p class="product-desc">Fresh salmon with avocado and cucumber</p>
+                        <div class="rating-mini">⭐ 4.9 (298 reviews)</div>
+                        <div class="product-footer flex between">
+                            <span class="price">₹449</span>
+                            <button class="btn-add-cart" data-product-id="6" data-item="Salmon Sushi Roll" data-price="449" data-restaurant="Sushi Master">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS SECTION -->
+        <section class="testimonials-section wrapper" id="about">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Real reviews from real customers</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"The food arrived hot and delicious! Best pizza I've had in a while. Highly recommend!"</p>
+                    <div class="reviewer-info flex">
+                        <div class="reviewer-avatar">
+                            <img src="images/profile1.jpeg" alt="Rajesh Kumar">
+                        </div>
+                        <div>
+                            <p class="reviewer-name">Rajesh Kumar</p>
+                            <p class="review-date">2 days ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"Super fast delivery! My order arrived in just 18 minutes. The burger was perfect!"</p>
+                    <div class="reviewer-info flex">
+                        <div class="reviewer-avatar">
+                            <img src="images/profile2.jpeg" alt="Priya Singh">
+                        </div>
+                        <div>
+                            <p class="reviewer-name">Priya Singh</p>
+                            <p class="review-date">5 days ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating-stars">⭐⭐⭐⭐</div>
+                    <p class="review-text">"Great selection and reasonable prices. Definitely ordering again next week!"</p>
+                    <div class="reviewer-info flex">
+                        <div class="reviewer-avatar">
+                            <img src="images/profile3.jpeg" alt="Arjun Patel">
+                        </div>
+                        <div>
+                            <p class="reviewer-name">Arjun Patel</p>
+                            <p class="review-date">1 week ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"The sushi was incredibly fresh and beautifully presented. Worth every penny!"</p>
+                    <div class="reviewer-info flex">
+                        <div class="reviewer-avatar">
+                            <img src="images/profile1.jpeg" alt="Anjali Desai">
+                        </div>
+                        <div>
+                            <p class="reviewer-name">Anjali Desai</p>
+                            <p class="review-date">1 week ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"Easy to use app, great customer service. They even called to confirm my order preferences!"</p>
+                    <div class="reviewer-info flex">
+                        <div class="reviewer-avatar">
+                            <img src="images/profile2.jpeg" alt="Vikram Iyer">
+                        </div>
+                        <div>
+                            <p class="reviewer-name">Vikram Iyer</p>
+                            <p class="review-date">2 weeks ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"Love the variety of restaurants. Found a new favorite place thanks to Foodie!"</p>
+                    <div class="reviewer-info flex">
+                        <div class="reviewer-avatar">
+                            <img src="images/profile3.jpeg" alt="Sana Gupta">
+                        </div>
+                        <div>
+                            <p class="reviewer-name">Sana Gupta</p>
+                            <p class="review-date">2 weeks ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS SECTION -->
+        <section class="how-it-works wrapper" id="how-it-works">
+            <div class="section-header">
+                <h2>How Foodie Works</h2>
+                <p>Simple steps to get your food delivered</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <img src="images/easy-to-order.png" alt="Browse restaurants">
+                    </div>
+                    <div class="step-number">1</div>
+                    <h3>Browse</h3>
+                    <p>Explore thousands of restaurants and dishes at your fingertips</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <img src="images/best-quality.png" alt="Place your order">
+                    </div>
+                    <div class="step-number">2</div>
+                    <h3>Order</h3>
+                    <p>Add your favorite items to cart and proceed to checkout</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <img src="images/fast-delivery.png" alt="Track delivery">
+                    </div>
+                    <div class="step-number">3</div>
+                    <h3>Track</h3>
+                    <p>Real-time tracking to know when your food arrives</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <img src="images/delivery-boy-with-phone.png" alt="Enjoy your food">
+                    </div>
+                    <div class="step-number">4</div>
+                    <h3>Enjoy</h3>
+                    <p>Receive hot, delicious food at your doorstep</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- APP DOWNLOAD SECTION -->
+        <section class="app-section wrapper" id="app-download">
+            <div class="app-content flex gap-4">
+                <div class="app-text">
+                    <h2>Get the <span>Foodie</span> App</h2>
+                    <p class="para">Download our mobile app for a better experience. Get exclusive deals, real-time tracking, and faster ordering right on your phone.</p>
+                    <div class="app-buttons flex gap-2">
+                        <a href="#" class="app-store-btn flex">
+                            <i class="fa-brands fa-apple"></i>
+                            <div>
+                                <small>Download on the</small>
+                                <p>App Store</p>
+                            </div>
+                        </a>
+                        <a href="#" class="app-store-btn flex">
+                            <i class="fa-brands fa-google-play"></i>
+                            <div>
+                                <small>Get it on</small>
+                                <p>Google Play</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="app-image">
+                    <img src="images/mobile-app.png" alt="Foodie mobile app">
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="cta-section wrapper">
+            <h2>Hungry? Order Now!</h2>
+            <p>Get your favorite food delivered in 30 minutes or less</p>
+            <a href="#restaurants" class="btn btn-large">Order Now</a>
+        </section>
+    </main>
+
+    <!-- FOOTER PART -->
+    <footer class="footer" id="contact">
+        <div class="wrapper">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Foodie</h3>
+                    <p>Your favorite food delivery platform. Delivering happiness, one order at a time.</p>
+                    <div class="social-links flex gap-2">
+                        <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#press">Press</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>For Users</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#support">Support</a></li>
+                        <li><a href="#offers">Current Offers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                        <li><a href="#refund">Refund Policy</a></li>
+                        <li><a href="#legal">Legal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>📧 support@foodie.com</p>
+                    <p>📞 1-800-FOODIE-1</p>
+                    <p>📍 123 Food Street, Delivery City</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Get updates on special offers</p>
+                    <div class="newsletter-form flex">
+                        <input type="email" placeholder="Your email" id="newsletter-email">
+                        <button type="button" class="btn" onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom flex between">
+                <p>&copy; 2026 Foodie. All rights reserved.</p>
+                <p>Made with ❤️ for food lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
